@@ -1,18 +1,18 @@
 import numpy as np
-import math
+
+try:
+    import cupy as xp
+    xp.array([0])  # triggers GPU init; fails if no GPU
+except Exception:
+    import numpy as xp
 
 def ml_estimation(data: np.ndarray):
     # calculate sample mean
-    mu_hat = np.mean(data, axis=0)
+    mu_hat = xp.mean(data, axis=0)
 
     # calculate sample covariance matrix
-    product_array = []
-    for x in data:
-        x_centered = x - mu_hat
-        product = np.outer(x_centered, x_centered)
-        product_array.append(product)
-
-    product_array = np.array(product_array)
-    sigma_hat = np.mean(product_array, axis=0)
+    # (X_centered.T @ X_centered) / N is equivalent to mean of outer products
+    X_centered = data - mu_hat
+    sigma_hat = (X_centered.T @ X_centered) / data.shape[0]
 
     return mu_hat, sigma_hat
