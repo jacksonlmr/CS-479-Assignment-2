@@ -1,15 +1,55 @@
-from tabulate import tabulate
+import argparse
+import os
+import warnings
+
+# Parse args BEFORE importing project modules so FORCE_CPU is visible
+# to classifier.py and estimation.py at their import-time GPU detection.
+parser = argparse.ArgumentParser(description="Bayesian classifier experiment")
+group = parser.add_mutually_exclusive_group()
+group.add_argument("--cpu", action="store_true", help="Force NumPy (CPU) even if GPU is available")
+group.add_argument("--gpu", action="store_true", help="Require CuPy (GPU); exit if unavailable")
+args = parser.parse_args()
+
+if args.cpu:
+    os.environ["FORCE_CPU"] = "1"
+
+# Project imports — classifier.py / estimation.py see FORCE_CPU here
 import numpy as np_cpu
 from classifier import bayesian_case_3, bayesian_case_1
 from estimation import ml_estimation
+from display_helpers import (
+    console, build_param_table, build_rate_table,
+    param_legend, rate_legend, with_legend, Group, Rule,
+)
 
-try:
-    import cupy as xp
-    xp.array([0])  # triggers GPU init; fails if no GPU
-    print("GPU detected — using CuPy")
-except Exception:
+warnings.filterwarnings("ignore", category=FutureWarning, module="cupy")
+
+if args.cpu:
     import numpy as xp
-    print("No GPU detected — using NumPy")
+    print("Using NumPy (CPU) — forced via --cpu")
+elif args.gpu:
+    try:
+        import cupy as xp
+        xp.linalg.cholesky(xp.eye(2, dtype=float))  # validates cublas
+        print("Using CuPy (GPU) — forced via --gpu")
+    except Exception as e:
+        print(f"GPU requested but CuPy is unavailable: {e}")
+        print("Check your CUDA version:  nvcc --version")
+        print("Install matching CuPy:    pip install cupy-cuda11x  (CUDA 11.x)")
+        print("                       or pip install cupy-cuda12x  (CUDA 12.x)")
+        print("Or run on CPU:            python experiment_1.py --cpu")
+        raise SystemExit(1)
+else:
+    try:
+        import cupy as xp
+        xp.linalg.cholesky(xp.eye(2, dtype=float))  # validates cublas
+        print("GPU detected — using CuPy")
+    except Exception:
+        import numpy as xp
+        print("No GPU detected — using NumPy")
+
+# set seed for consistent results
+xp.random.seed(42)
 
 mu1 = xp.array([1, 1])
 sigma1 = xp.array([[1, 0], [0, 1]])
@@ -70,25 +110,19 @@ for frac in fractions:
 samples_set1_est_params = {}
 samples_set2_est_params = {}
 
-def to_cpu(arr):
-    return arr.get() if hasattr(arr, 'get') else arr
-
 for frac in fractions:
     samples_set1_est_params[frac] = ml_estimation(samples_set1[frac])
     samples_set2_est_params[frac] = ml_estimation(samples_set2[frac])
 
-    table_data = [
-        ["mu 1", to_cpu(samples_set1_est_params[frac][0])],
-        ["sigma 1", to_cpu(samples_set1_est_params[frac][1])],
-        ["mu 2", to_cpu(samples_set2_est_params[frac][0])],
-        ["sigma 2", to_cpu(samples_set2_est_params[frac][1])]
-    ]
-    print(f"Parameters from {frac*100}% of data:")
-    print(tabulate(table_data, headers=["Parameter", "Estimate"], tablefmt="grid"))
-
+console.print(with_legend(Group(
+    build_param_table("Class 1 - Estimated Parameters vs. True Parameters",
+                      "1", mu1, sigma1, samples_set1_est_params, fractions),
+    Rule(style="dim"),
+    build_param_table("Class 2 - Estimated Parameters vs. True Parameters",
+                      "2", mu2, sigma2, samples_set2_est_params, fractions),
+), param_legend()))
 
 # calculate classifications — classify all points in one batched GPU call
-print("\nClassifying with real parameters...")
 results_real = bayesian_case_3(mu1, mu2, sigma1, sigma2, set1, set2, combined_set)
 
 real_misses = [
@@ -100,7 +134,6 @@ real_misses = [
 sample_misses = {}
 
 for frac in fractions:
-    print(f"Classifying with {frac*100:.4g}% estimated parameters...")
     mu1_est, sigma1_est = samples_set1_est_params[frac]
     mu2_est, sigma2_est = samples_set2_est_params[frac]
 
@@ -132,28 +165,13 @@ s1_miss_rate_real_params = real_misses[0]/set1_size
 s2_miss_rate_real_params = real_misses[1]/set2_size
 total_miss_rate_real_params = (real_misses[0]+real_misses[1])/combined_set_size
 
-# Print miss rates for real params
-print(f"\nReal Parameter Missclassification Rates:")
-print(f"    W1: {s1_miss_rate_real_params}")
-print(f"    W2: {s2_miss_rate_real_params}")
-print(f"    Total: {total_miss_rate_real_params}")
-
-# print miss rates for est params
-print("\nEstimated Parameter Missclassification Rates")
-for key, value in sample_miss_rates.items():
-    print(f"\n{key*100:.4g}% sample:")
-    print(f"    W1: {sample_miss_rates[key][0]}")
-    print(f"    W2: {sample_miss_rates[key][1]}")
-    print(f"    Total: {sample_miss_rates[key][2]}")
-    print(f"    W1 percent change: {((s1_miss_rate_real_params - sample_miss_rates[key][0])/s1_miss_rate_real_params)*100}%")
-    print(f"    W2 percent change: {((s2_miss_rate_real_params - sample_miss_rates[key][1])/s2_miss_rate_real_params)*100}%")
-    print(f"    Total percent change: {((total_miss_rate_real_params - sample_miss_rates[key][2])/total_miss_rate_real_params)*100}%")
+# save estimated rates before zeroed section overwrites sample_miss_rates
+estimated_miss_rates = dict(sample_miss_rates)
 
 # Classify using zero out diagonals
 sample_misses = {}
 
 for frac in fractions:
-    print(f"Classifying with {frac*100:.4g}% estimated parameters...")
     mu1_est, sigma1_est = samples_set1_est_params[frac]
     mu2_est, sigma2_est = samples_set2_est_params[frac]
 
@@ -185,13 +203,12 @@ for frac in fractions:
     sample_miss_rates[frac].append((s1_misses + s2_misses)/combined_set_size)
 
 
-# print miss rates for est params with zero non diagonals
-print("\nEstimated Parameter Zero'd Non-Diagonals Missclassification Rates")
-for key, value in sample_miss_rates.items():
-    print(f"\n{key*100:.4g}% sample:")
-    print(f"    W1: {sample_miss_rates[key][0]}")
-    print(f"    W2: {sample_miss_rates[key][1]}")
-    print(f"    Total: {sample_miss_rates[key][2]}")
-    print(f"    W1 percent change: {((s1_miss_rate_real_params - sample_miss_rates[key][0])/s1_miss_rate_real_params)*100}%")
-    print(f"    W2 percent change: {((s2_miss_rate_real_params - sample_miss_rates[key][1])/s2_miss_rate_real_params)*100}%")
-    print(f"    Total percent change: {((total_miss_rate_real_params - sample_miss_rates[key][2])/total_miss_rate_real_params)*100}%")
+# ── Misclassification Rate Comparison Tables ──────────────────────────────────
+
+console.print(with_legend(Group(
+    build_rate_table("W1 Misclassification Rates",    s1_miss_rate_real_params,    0, fractions, estimated_miss_rates, sample_miss_rates),
+    Rule(style="dim"),
+    build_rate_table("W2 Misclassification Rates",    s2_miss_rate_real_params,    1, fractions, estimated_miss_rates, sample_miss_rates),
+    Rule(style="dim"),
+    build_rate_table("Total Misclassification Rates", total_miss_rate_real_params, 2, fractions, estimated_miss_rates, sample_miss_rates),
+), rate_legend()))

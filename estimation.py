@@ -1,10 +1,14 @@
 import numpy as np
+import os
 
-try:
-    import cupy as xp
-    xp.array([0])  # triggers GPU init; fails if no GPU
-except Exception:
+if os.environ.get("FORCE_CPU"):
     import numpy as xp
+else:
+    try:
+        import cupy as xp
+        xp.linalg.cholesky(xp.eye(2, dtype=float))
+    except Exception:
+        import numpy as xp
 
 def ml_estimation(data: np.ndarray):
     # calculate sample mean

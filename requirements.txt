@@ -1,4 +1,9 @@
 numpy
 matplotlib
 tabulate
-cupy-cuda12x
+rich
+# CuPy GPU acceleration — install the version matching your CUDA toolkit:
+#   CUDA 11.x:  cupy-cuda11x
+#   CUDA 12.x:  cupy-cuda12x
+#   CUDA 13.x:  cupy-cuda13x
+cupy-cuda13x

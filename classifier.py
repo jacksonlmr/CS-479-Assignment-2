@@ -1,11 +1,15 @@
 import numpy as np
 import math
+import os
 
-try:
-    import cupy as xp
-    xp.array([0])  # triggers GPU init; fails if no GPU
-except Exception:
+if os.environ.get("FORCE_CPU"):
     import numpy as xp
+else:
+    try:
+        import cupy as xp
+        xp.linalg.cholesky(xp.eye(2, dtype=float))
+    except Exception:
+        import numpy as xp
 
 def bayesian_case_1(mu1, mu2, sigma1, sigma2, w1_data: np.array, w2_data: np.array, instances):
     """
