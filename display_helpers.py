@@ -31,7 +31,8 @@ def rich_delta(real, est):
 
 def make_legend(title, entries):
     leg = Table(title=title, box=box.ROUNDED,
-                title_style="bold white", show_lines=True)
+                title_style="bold white", show_lines=True,
+                show_header=False)
     leg.add_column("Color", justify="center", no_wrap=True, min_width=7)
     leg.add_column("Meaning", justify="left")
     for swatch, meaning in entries:
@@ -47,8 +48,7 @@ def param_legend():
     ])
 
 def rate_legend():
-    return make_legend("Missclassification Legend", [
-        ("[bold white]█████[/]",        "Real parameter rate (baseline)"),
+    return make_legend("Misclassification Legend", [
         ("[dim]█████[/]",          "Negligible change (+/- 0.5%)"),
         ("[dim light_green]█████[/]",        "Rate improved (< -0.5%)"),
         ("[light_green]█████[/]",   "Rate greatly improved (< -5%)"),

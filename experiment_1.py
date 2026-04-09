@@ -51,17 +51,17 @@ else:
 # set seed for consistent results
 xp.random.seed(42)
 
-mu1 = xp.array([1, 1])
-sigma1 = xp.array([[1, 0], [0, 1]])
-
-mu2 = xp.array([4, 4])
-sigma2 = xp.array([[1, 0], [0, 1]])
-
 # mu1 = xp.array([1, 1])
 # sigma1 = xp.array([[1, 0], [0, 1]])
 
 # mu2 = xp.array([4, 4])
-# sigma2 = xp.array([[4, 0], [0, 8]])
+# sigma2 = xp.array([[1, 0], [0, 1]])
+
+mu1 = xp.array([1, 1])
+sigma1 = xp.array([[1, 0], [0, 1]])
+
+mu2 = xp.array([4, 4])
+sigma2 = xp.array([[4, 0], [0, 8]])
 
 set1 = xp.random.multivariate_normal(mu1, sigma1, 60000)
 set1_size = set1.shape[0]

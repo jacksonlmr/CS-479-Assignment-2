@@ -1,0 +1,397 @@
+\documentclass{article}
+
+% --- OVERLEAF COMPATIBLE PREAMBLE ---
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+
+% Set font to Sans Serif (Helvetica) to approximate Calibri
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+% --- USER SPECIFIC PACKAGES ---
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{float}
+\setcounter{secnumdepth}{0}
+
+% Define custom colors to match the image data
+\definecolor{trueyellow}{HTML}{FFFF00}
+\definecolor{meangreen}{HTML}{90EE90}
+\definecolor{sigmablue}{HTML}{00CED1}
+\definecolor{offpurple}{HTML}{DA70D6}
+
+% Legend colors for Misclassification
+\definecolor{negchange}{HTML}{808080} % Gray
+\definecolor{improved}{HTML}{558B2F} % Dark Green
+\definecolor{greatimproved}{HTML}{A5FF7F} % Bright Green
+\definecolor{worsened}{HTML}{FF8A8A} % Light Red
+\definecolor{greatworsened}{HTML}{8B0000} % Dark Red
+
+% --- DOCUMENT METADATA ---
+\title{Programming Assignment 2 \\ \large Maximum Likelihood Estimation \\ CS 479}
+\author{Jackson Loughmiller}
+\date{April 7, 2026}
+
+\begin{document}
+
+% Title and Declaration Page
+\begin{titlepage}
+    \centering
+    \vspace*{\fill}
+    
+    {\huge \textbf{Programming Assignment 2}} \\
+    \vspace{0.5cm}
+    {\Large Maximum Likelihood Estimation} \\
+    \vspace{0.5cm}
+    {\large CS 479}
+    
+    \vspace{2cm}
+    
+    {\large Jackson Loughmiller} \\
+    \vspace{0.2cm}
+    {\large April 7, 2026}
+    
+    \vspace{3cm}
+    
+    \noindent I declare that all material in this assignment is my own work except
+    where there is clear acknowledgment or reference to the work of others.
+    I understand that both my report and code may be subjected to plagiarism
+    detection software, and fully accept all consequences if found
+    responsible for plagiarism, as explained in the syllabus, and described
+    in UNR's Academic Standards Policy: UAM 6,502.
+    
+    \vspace*{\fill}
+\end{titlepage}
+
+\newpage
+
+\section{Theory}\label{theory}
+
+\subsection{Experiment 1}\label{experiment-1}
+
+\subsubsection*{Parameter Estimation}\label{parameter-estimation}
+
+When using Bayesian classifiers in the practice, it generally cannot be
+assumed that one knows the exact parameters of the distribution of their
+data. Therefore there must be some technique to estimate those
+parameters based on the available training data, that has been
+pre-annotated by humans. The parameters that need to be estimated are
+the parameters of the likelihood function, shown below in Eq. 1.1:
+
+\begin{equation}
+p(x|w_{i}) \sim N(\mu, \Sigma), \quad x \in R^{N}
+\label{eq:1.1}
+\end{equation}
+
+$p(x|w_{i})$ can also be denoted as $p(x|\theta)$, where
+$\theta = (\mu, \Sigma)$ are the parameters of the distribution. The
+overall goal of parameter estimation is to determine the best $\theta$
+given our data, $D$.
+
+\subsubsection*{Maximum Likelihood Estimation}\label{maximum-likelihood-estimation}
+
+Maximum likelihood estimation is one method of parameter estimation,
+that makes a point estimate, $\widehat{\theta}$, by maximizing the
+likelihood of obtaining the samples observed in the training data, $D$,
+from the distribution $p(x|\widehat{\theta})$. It assumes the
+parameters $\theta$ are fixed, unknown quantities. The equation for
+$\widehat{\theta}$ is shown below in Eq. 1.2:
+
+\begin{equation}
+\widehat{\theta} = \arg\max_{\theta} p(D|\theta)
+\label{eq:1.2}
+\end{equation}
+
+Assuming all the samples $x_{1}, x_{2}, \dots, x_{n}$ are drawn
+independently from $p(x|\theta)$, $p(D|\theta)$ is given by Eq. 1.3,
+below:
+
+\begin{equation}
+p(D|\theta) = \prod_{k=1}^{n} p(x_{k}|\theta)
+\label{eq:1.3}
+\end{equation}
+
+\begin{equation}
+\ln p(D|\theta) = \sum_{k=1}^{n} \ln(p(x_{k}|\theta))
+\label{eq:1.4}
+\end{equation}
+
+Now, maximizing $\ln p(D|\theta)$ is equivalent to maximizing
+$p(D|\theta)$. This maximum can be found by finding the point where
+the gradient of $\ln p(D|\theta)$ is equal to zero, shown below in Eq. 1.5:
+
+\begin{equation}
+\nabla_{\theta}\ln p(D|\theta) = 0
+\label{eq:1.5}
+\end{equation}
+
+The parameters of $\theta$, $\widehat{\mu}$ (sample mean) and
+$\widehat{\Sigma}$ (sample covariance) are given by Eqs. 1.6 and 1.7,
+respectively:
+
+\begin{equation}
+\widehat{\mu} = \frac{1}{n}\sum_{k=1}^{n}x_{k}
+\label{eq:1.6}
+\end{equation}
+
+\begin{equation}
+\widehat{\Sigma} = \frac{1}{n}\sum_{k=1}^{n}(x_{k} - \widehat{\mu})(x_{k} - \widehat{\mu})^{t}
+\label{eq:1.7}
+\end{equation}
+
+\subsection{Experiment 2}\label{experiment-2}
+
+\subsection{Experiment 3}\label{experiment-3}
+
+\newpage
+\section{Results and Discussion}\label{results-and-discussion}
+
+\subsection{Experiment 1}\label{experiment-1-1}
+
+Tables 1 and 2, below, show the real and estimated parameters for different sample sizes of the dataset. As the tables show, the parameters get progressively farther away from the true parameters as the sample size decreases. 
+
+\begin{table}[H]
+\centering
+\small
+\caption{Class 1 - Estimated Parameters vs. True Parameters}
+\vspace{0.5em}
+\begin{tabular}{ccccccc}
+\toprule
+\textbf{Sample} & \textbf{mu1\_x} & \textbf{mu1\_y} & \textbf{sigma1\_11} & \textbf{sigma1\_12} & \textbf{sigma1\_21} & \textbf{sigma1\_22} \\
+\midrule
+\textbf{True} & \cellcolor{trueyellow} 1.0000 & \cellcolor{trueyellow} 1.0000 & \cellcolor{trueyellow} 1.0000 & \cellcolor{trueyellow} 0.0000 & \cellcolor{trueyellow} 0.0000 & \cellcolor{trueyellow} 1.0000 \\
+\textbf{100\%} & \cellcolor{meangreen} 1.0049 & \cellcolor{meangreen} 0.9960 & \cellcolor{sigmablue} 1.0037 & \cellcolor{offpurple} 0.0014 & \cellcolor{offpurple} 0.0014 & \cellcolor{sigmablue} 1.0034 \\
+\textbf{10\%} & \cellcolor{meangreen} 1.0158 & \cellcolor{meangreen} 0.9724 & \cellcolor{sigmablue} 0.9784 & \cellcolor{offpurple} -0.0201 & \cellcolor{offpurple} -0.0201 & \cellcolor{sigmablue} 1.0050 \\
+\textbf{1\%} & \cellcolor{meangreen} 1.0130 & \cellcolor{meangreen} 0.9815 & \cellcolor{sigmablue} 0.9317 & \cellcolor{offpurple} 0.0019 & \cellcolor{offpurple} 0.0019 & \cellcolor{sigmablue} 1.0601 \\
+\textbf{0.1\%} & \cellcolor{meangreen} 1.0228 & \cellcolor{meangreen} 1.1984 & \cellcolor{sigmablue} 1.0328 & \cellcolor{offpurple} -0.0435 & \cellcolor{offpurple} -0.0435 & \cellcolor{sigmablue} 1.1159 \\
+\textbf{0.01\%} & \cellcolor{meangreen} 0.7019 & \cellcolor{meangreen} 1.4115 & \cellcolor{sigmablue} 0.7182 & \cellcolor{offpurple} -0.1377 & \cellcolor{offpurple} -0.1377 & \cellcolor{sigmablue} 0.5233 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\small
+\caption{Class 2 - Estimated Parameters vs. True Parameters}
+\vspace{0.5em}
+\begin{tabular}{ccccccc}
+\toprule
+\textbf{Sample} & \textbf{mu2\_x} & \textbf{mu2\_y} & \textbf{sigma2\_11} & \textbf{sigma2\_12} & \textbf{sigma2\_21} & \textbf{sigma2\_22} \\
+\midrule
+\textbf{True} & \cellcolor{trueyellow} 4.0000 & \cellcolor{trueyellow} 4.0000 & \cellcolor{trueyellow} 1.0000 & \cellcolor{trueyellow} 0.0000 & \cellcolor{trueyellow} 0.0000 & \cellcolor{trueyellow} 1.0000 \\
+\textbf{100\%} & \cellcolor{meangreen} 3.9997 & \cellcolor{meangreen} 4.0044 & \cellcolor{sigmablue} 1.0015 & \cellcolor{offpurple} -0.0005 & \cellcolor{offpurple} -0.0005 & \cellcolor{sigmablue} 1.0015 \\
+\textbf{10\%} & \cellcolor{meangreen} 3.9955 & \cellcolor{meangreen} 4.0133 & \cellcolor{sigmablue} 1.0105 & \cellcolor{offpurple} 0.0087 & \cellcolor{offpurple} 0.0087 & \cellcolor{sigmablue} 1.0154 \\
+\textbf{1\%} & \cellcolor{meangreen} 3.9794 & \cellcolor{meangreen} 4.0238 & \cellcolor{sigmablue} 1.0229 & \cellcolor{offpurple} 0.0042 & \cellcolor{offpurple} 0.0042 & \cellcolor{sigmablue} 0.9445 \\
+\textbf{0.1\%} & \cellcolor{meangreen} 4.1308 & \cellcolor{meangreen} 3.9784 & \cellcolor{sigmablue} 0.9435 & \cellcolor{offpurple} -0.0139 & \cellcolor{offpurple} -0.0139 & \cellcolor{sigmablue} 0.8722 \\
+\textbf{0.01\%} & \cellcolor{meangreen} 4.0347 & \cellcolor{meangreen} 4.0391 & \cellcolor{sigmablue} 1.1736 & \cellcolor{offpurple} 0.3776 & \cellcolor{offpurple} 0.3776 & \cellcolor{sigmablue} 1.1840 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{center}
+\textbf{Parameter Legend} \\
+\begin{tabular}{|l|l|}
+\hline
+\cellcolor{trueyellow} & True reference values \\ \hline
+\cellcolor{meangreen} & Mean (mu) \\ \hline
+\cellcolor{sigmablue} & Diagonal sigma (11, 22) \\ \hline
+\cellcolor{offpurple} & Off-diagonal sigma (12, 21) \\ \hline
+\end{tabular}
+\end{center}
+
+\newpage
+\noindent Tables 3-5, below, show the misclassification rates, and their percent change from the real parameters 
+rates for each sample size. As shown by the tables, there is only negligible difference in the rates until the 
+sample size reaches 0.1\% of the original. The difference is most significant in the set that contains only 0.01\% 
+of the original training data.  
+
+\begin{table}[H]
+\centering
+\small
+\caption{W1 Misclassification Rates}
+\vspace{0.5em}
+\begin{tabular}{cccccc}
+\toprule
+\textbf{Sample Size} & \textbf{Real Params} & \textbf{Estimated Params} & \textbf{\% Change (Est)} & \textbf{Zeroed Diag} & \textbf{\% Change (Zeroed)} \\
+\midrule
+\textbf{0.01\%} & 2.7883\% & 6.6500\% & \cellcolor{greatworsened}\color{white} +138.49\% & 4.7517\% & \cellcolor{greatworsened}\color{white} +70.41\% \\
+\textbf{0.1\%} & 2.7883\% & 1.8400\% & \cellcolor{greatimproved} -34.01\% & 1.8150\% & \cellcolor{greatimproved} -34.91\% \\
+\textbf{1\%} & 2.7883\% & 2.7483\% & \cellcolor{improved} -1.43\% & 2.7400\% & \cellcolor{improved} -1.73\% \\
+\textbf{10\%} & 2.7883\% & 2.9417\% & \cellcolor{greatworsened}\color{white} +5.50\% & 2.8617\% & \cellcolor{worsened} +2.63\% \\
+\textbf{100\%} & 2.7883\% & 2.7683\% & \cellcolor{improved} -0.72\% & 2.7767\% & \cellcolor{negchange} -0.42\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\small
+\caption{W2 Misclassification Rates}
+\vspace{0.5em}
+\begin{tabular}{cccccc}
+\toprule
+\textbf{Sample Size} & \textbf{Real Params} & \textbf{Estimated Params} & \textbf{\% Change (Est)} & \textbf{Zeroed Diag} & \textbf{\% Change (Zeroed)} \\
+\midrule
+\textbf{0.01\%} & 1.0364\% & 0.3371\% & \cellcolor{greatimproved} -67.47\% & 0.6093\% & \cellcolor{greatimproved} -41.21\% \\
+\textbf{0.1\%} & 1.0364\% & 1.6236\% & \cellcolor{greatworsened}\color{white} +56.65\% & 1.6400\% & \cellcolor{greatworsened}\color{white} +58.24\% \\
+\textbf{1\%} & 1.0364\% & 1.0486\% & \cellcolor{worsened} +1.17\% & 1.0536\% & \cellcolor{worsened} +1.65\% \\
+\textbf{10\%} & 1.0364\% & 0.9814\% & \cellcolor{greatimproved} -5.31\% & 1.0071\% & \cellcolor{improved} -2.83\% \\
+\textbf{100\%} & 1.0364\% & 1.0429\% & \cellcolor{worsened} +0.62\% & 1.0407\% & \cellcolor{negchange} +0.41\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\small
+\caption{Total Misclassification Rates}
+\vspace{0.5em}
+\begin{tabular}{cccccc}
+\toprule
+\textbf{Sample Size} & \textbf{Real Params} & \textbf{Estimated Params} & \textbf{\% Change (Est)} & \textbf{Zeroed Diag} & \textbf{\% Change (Zeroed)} \\
+\midrule
+\textbf{0.01\%} & 1.5620\% & 2.2310\% & \cellcolor{greatworsened}\color{white} +42.83\% & 1.8520\% & \cellcolor{greatworsened}\color{white} +18.57\% \\
+\textbf{0.1\%} & 1.5620\% & 1.6885\% & \cellcolor{greatworsened}\color{white} +8.10\% & 1.6925\% & \cellcolor{greatworsened}\color{white} +8.35\% \\
+\textbf{1\%} & 1.5620\% & 1.5585\% & \cellcolor{negchange} -0.22\% & 1.5595\% & \cellcolor{negchange} -0.16\% \\
+\textbf{10\%} & 1.5620\% & 1.5695\% & \cellcolor{negchange} +0.48\% & 1.5635\% & \cellcolor{negchange} +0.10\% \\
+\textbf{100\%} & 1.5620\% & 1.5605\% & \cellcolor{negchange} -0.10\% & 1.5615\% & \cellcolor{negchange} -0.03\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{center}
+\textbf{Misclassification Legend} \\
+\begin{tabular}{|l|l|}
+\hline
+\cellcolor{negchange} & Negligible change (+/- 0.5\%) \\ \hline
+\cellcolor{improved} & Rate improved (< -0.5\%) \\ \hline
+\cellcolor{greatimproved} & Rate greatly improved (< -5\%) \\ \hline
+\cellcolor{worsened} & Rate worsened (> +0.5\%) \\ \hline
+\cellcolor{greatworsened} & Rate greatly worsened (> +5\%) \\ \hline
+\end{tabular}
+\end{center}
+
+\subsection{Experiment 2}\label{experiment-2-1}
+
+\begin{table}[H]
+\centering
+\small
+\caption{Class 1 - Estimated Parameters vs. True Parameters}
+\vspace{0.5em}
+\begin{tabular}{ccccccc}
+\toprule
+\textbf{Sample} & \textbf{mu1\_x} & \textbf{mu1\_y} & \textbf{sigma1\_11} & \textbf{sigma1\_12} & \textbf{sigma1\_21} & \textbf{sigma1\_22} \\
+\midrule
+\textbf{True} & \cellcolor{trueyellow} 1.0000 & \cellcolor{trueyellow} 1.0000 & \cellcolor{trueyellow} 1.0000 & \cellcolor{trueyellow} 0.0000 & \cellcolor{trueyellow} 0.0000 & \cellcolor{trueyellow} 1.0000 \\
+\textbf{100\%} & \cellcolor{meangreen} 1.0049 & \cellcolor{meangreen} 0.9960 & \cellcolor{sigmablue} 1.0037 & \cellcolor{offpurple} 0.0014 & \cellcolor{offpurple} 0.0014 & \cellcolor{sigmablue} 1.0034 \\
+\textbf{10\%} & \cellcolor{meangreen} 1.0158 & \cellcolor{meangreen} 0.9724 & \cellcolor{sigmablue} 0.9784 & \cellcolor{offpurple} -0.0201 & \cellcolor{offpurple} -0.0201 & \cellcolor{sigmablue} 1.0050 \\
+\textbf{1\%} & \cellcolor{meangreen} 1.0130 & \cellcolor{meangreen} 0.9815 & \cellcolor{sigmablue} 0.9317 & \cellcolor{offpurple} 0.0019 & \cellcolor{offpurple} 0.0019 & \cellcolor{sigmablue} 1.0601 \\
+\textbf{0.1\%} & \cellcolor{meangreen} 1.0228 & \cellcolor{meangreen} 1.1984 & \cellcolor{sigmablue} 1.0328 & \cellcolor{offpurple} -0.0435 & \cellcolor{offpurple} -0.0435 & \cellcolor{sigmablue} 1.1159 \\
+\textbf{0.01\%} & \cellcolor{meangreen} 0.7019 & \cellcolor{meangreen} 1.4115 & \cellcolor{sigmablue} 0.7182 & \cellcolor{offpurple} -0.1377 & \cellcolor{offpurple} -0.1377 & \cellcolor{sigmablue} 0.5233 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\small
+\caption{Class 2 - Estimated Parameters vs. True Parameters}
+\vspace{0.5em}
+\begin{tabular}{ccccccc}
+\toprule
+\textbf{Sample} & \textbf{mu2\_x} & \textbf{mu2\_y} & \textbf{sigma2\_11} & \textbf{sigma2\_12} & \textbf{sigma2\_21} & \textbf{sigma2\_22} \\
+\midrule
+\textbf{True} & \cellcolor{trueyellow} 4.0000 & \cellcolor{trueyellow} 4.0000 & \cellcolor{trueyellow} 4.0000 & \cellcolor{trueyellow} 0.0000 & \cellcolor{trueyellow} 0.0000 & \cellcolor{trueyellow} 8.0000 \\
+\textbf{100\%} & \cellcolor{meangreen} 3.9994 & \cellcolor{meangreen} 4.0124 & \cellcolor{sigmablue} 4.0061 & \cellcolor{offpurple} -0.0030 & \cellcolor{offpurple} -0.0030 & \cellcolor{sigmablue} 8.0121 \\
+\textbf{10\%} & \cellcolor{meangreen} 3.9910 & \cellcolor{meangreen} 4.0376 & \cellcolor{sigmablue} 4.0419 & \cellcolor{offpurple} 0.0493 & \cellcolor{offpurple} 0.0493 & \cellcolor{sigmablue} 8.1234 \\
+\textbf{1\%} & \cellcolor{meangreen} 3.9588 & \cellcolor{meangreen} 4.0673 & \cellcolor{sigmablue} 4.0915 & \cellcolor{offpurple} 0.0237 & \cellcolor{offpurple} 0.0237 & \cellcolor{sigmablue} 7.5560 \\
+\textbf{0.1\%} & \cellcolor{meangreen} 4.2616 & \cellcolor{meangreen} 3.9390 & \cellcolor{sigmablue} 3.7739 & \cellcolor{offpurple} -0.0785 & \cellcolor{offpurple} -0.0785 & \cellcolor{sigmablue} 6.9775 \\
+\textbf{0.01\%} & \cellcolor{meangreen} 4.0695 & \cellcolor{meangreen} 4.1107 & \cellcolor{sigmablue} 4.6942 & \cellcolor{offpurple} 2.1358 & \cellcolor{offpurple} 2.1358 & \cellcolor{sigmablue} 9.4720 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{center}
+\textbf{Parameter Legend} \\
+\begin{tabular}{|l|l|}
+\hline
+\cellcolor{trueyellow} & True reference values \\ \hline
+\cellcolor{meangreen} & Mean (mu) \\ \hline
+\cellcolor{sigmablue} & Diagonal sigma (11, 22) \\ \hline
+\cellcolor{offpurple} & Off-diagonal sigma (12, 21) \\ \hline
+\end{tabular}
+\end{center}
+
+\begin{table}[H]
+\centering
+\small
+\caption{W1 Misclassification Rates}
+\vspace{0.5em}
+\begin{tabular}{cccccc}
+\toprule
+\textbf{Sample Size} & \textbf{Real Params} & \textbf{Estimated Params} & \textbf{\% Change (Est)} & \textbf{Zeroed Diag} & \textbf{\% Change (Zeroed)} \\
+\midrule
+\textbf{0.01\%} & 8.6083\% & 23.5667\% & \cellcolor{greatworsened}\color{white} +173.77\% & 19.3933\% & \cellcolor{greatworsened}\color{white} +125.29\% \\
+\textbf{0.1\%} & 8.6083\% & 6.4550\% & \cellcolor{greatimproved} -25.01\% & 6.5900\% & \cellcolor{greatimproved} -23.45\% \\
+\textbf{1\%} & 8.6083\% & 8.6733\% & \cellcolor{worsened} +0.76\% & 8.6433\% & \cellcolor{negchange} +0.41\% \\
+\textbf{10\%} & 8.6083\% & 8.6733\% & \cellcolor{worsened} +0.76\% & 8.6033\% & \cellcolor{negchange} -0.06\% \\
+\textbf{100\%} & 8.6083\% & 8.5300\% & \cellcolor{improved} -0.91\% & 8.5367\% & \cellcolor{improved} -0.83\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\small
+\caption{W2 Misclassification Rates}
+\vspace{0.5em}
+\begin{tabular}{cccccc}
+\toprule
+\textbf{Sample Size} & \textbf{Real Params} & \textbf{Estimated Params} & \textbf{\% Change (Est)} & \textbf{Zeroed Diag} & \textbf{\% Change (Zeroed)} \\
+\midrule
+\textbf{0.01\%} & 7.2707\% & 4.7950\% & \cellcolor{greatimproved} -34.05\% & 5.3771\% & \cellcolor{greatimproved} -26.04\% \\
+\textbf{0.1\%} & 7.2707\% & 8.4414\% & \cellcolor{greatworsened}\color{white} +16.10\% & 8.3950\% & \cellcolor{greatworsened}\color{white} +15.46\% \\
+\textbf{1\%} & 7.2707\% & 7.2814\% & \cellcolor{negchange} +0.15\% & 7.2900\% & \cellcolor{negchange} +0.27\% \\
+\textbf{10\%} & 7.2707\% & 7.2500\% & \cellcolor{negchange} -0.28\% & 7.2657\% & \cellcolor{negchange} -0.07\% \\
+\textbf{100\%} & 7.2707\% & 7.3057\% & \cellcolor{negchange} +0.48\% & 7.3021\% & \cellcolor{negchange} +0.43\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\small
+\caption{Total Misclassification Rates}
+\vspace{0.5em}
+\begin{tabular}{cccccc}
+\toprule
+\textbf{Sample Size} & \textbf{Real Params} & \textbf{Estimated Params} & \textbf{\% Change (Est)} & \textbf{Zeroed Diag} & \textbf{\% Change (Zeroed)} \\
+\midrule
+\textbf{0.01\%} & 7.6720\% & 10.4265\% & \cellcolor{greatworsened}\color{white} +35.90\% & 9.5820\% & \cellcolor{greatworsened}\color{white} +24.90\% \\
+\textbf{0.1\%} & 7.6720\% & 7.8455\% & \cellcolor{worsened} +2.26\% & 7.8535\% & \cellcolor{worsened} +2.37\% \\
+\textbf{1\%} & 7.6720\% & 7.6990\% & \cellcolor{negchange} +0.35\% & 7.6960\% & \cellcolor{negchange} +0.31\% \\
+\textbf{10\%} & 7.6720\% & 7.6770\% & \cellcolor{negchange} +0.07\% & 7.6670\% & \cellcolor{negchange} -0.07\% \\
+\textbf{100\%} & 7.6720\% & 7.6730\% & \cellcolor{negchange} +0.01\% & 7.6725\% & \cellcolor{negchange} +0.01\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{center}
+\textbf{Misclassification Legend} \\
+\begin{tabular}{|l|l|}
+\hline
+\cellcolor{negchange} & Negligible change (+/- 0.5\%) \\ \hline
+\cellcolor{improved} & Rate improved (< -0.5\%) \\ \hline
+\cellcolor{greatimproved} & Rate greatly improved (< -5\%) \\ \hline
+\cellcolor{worsened} & Rate worsened (> +0.5\%) \\ \hline
+\cellcolor{greatworsened} & Rate greatly worsened (> +5\%) \\ \hline
+\end{tabular}
+\end{center}
+
+\subsection{Experiment 3}\label{experiment-3-1}
+
+\end{document}
