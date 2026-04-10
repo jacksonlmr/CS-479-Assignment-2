@@ -5,6 +5,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[english]{babel}
+\usepackage{graphicx}
 
 % Set font to Sans Serif (Helvetica) to approximate Calibri
 \usepackage{helvet}
@@ -16,6 +17,14 @@
 \usepackage{xcolor}
 \usepackage{colortbl}
 \usepackage{float}
+\usepackage{parskip} % paragraph spacing
+\setlength{\parskip}{1em}
+
+% Reduce spacing around and between floats (tables)
+\setlength{\floatsep}{4pt}
+\setlength{\textfloatsep}{8pt}
+\setlength{\intextsep}{4pt}
+
 \setcounter{secnumdepth}{0}
 
 % Define custom colors to match the image data
@@ -30,6 +39,8 @@
 \definecolor{greatimproved}{HTML}{A5FF7F} % Bright Green
 \definecolor{worsened}{HTML}{FF8A8A} % Light Red
 \definecolor{greatworsened}{HTML}{8B0000} % Dark Red
+
+
 
 % --- DOCUMENT METADATA ---
 \title{Programming Assignment 2 \\ \large Maximum Likelihood Estimation \\ CS 479}
@@ -71,7 +82,7 @@
 
 \section{Theory}\label{theory}
 
-\subsection{Experiment 1}\label{experiment-1}
+\subsection{Experiment 1 \& 2}\label{experiment-1}
 
 \subsubsection*{Parameter Estimation}\label{parameter-estimation}
 
@@ -143,16 +154,27 @@ respectively:
 \label{eq:1.7}
 \end{equation}
 
-\subsection{Experiment 2}\label{experiment-2}
-
 \subsection{Experiment 3}\label{experiment-3}
 
 \newpage
 \section{Results and Discussion}\label{results-and-discussion}
 
 \subsection{Experiment 1}\label{experiment-1-1}
+\noindent For this experiment, data was generated in the same manner as the first assignment, using the following parameters for the multivariate 
+Guassian distribution: 
 
-Tables 1 and 2, below, show the real and estimated parameters for different sample sizes of the dataset. As the tables show, the parameters get progressively farther away from the true parameters as the sample size decreases. 
+\begin{equation}
+\mu_{1} = \begin{bmatrix} 1 \\ 1 \end{bmatrix}, 
+\quad \Sigma_{1} = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}, 
+\quad \mu_{2} = \begin{bmatrix} 4 \\ 4 \end{bmatrix}, 
+\quad \Sigma_{2} = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}
+\label{eq:exp1_params}
+\end{equation}
+
+\noindent A total of 200,000 samples were generated, 60,000 from $\mu_{1}$ and $\Sigma_{1}$, and 140,000 from $\mu_{2}$ and $\Sigma_{2}$. Parameters were 
+then estimated using Maximum Likelihood Estimation on 100\%, 10\%, 1\%, 0.1\%, and 0.01\% of the data set. Tables 1 and 2, below, 
+show the real and estimated parameters for different sample sizes of the dataset. As the tables show, the parameters get 
+progressively farther away from the true parameters as the sample size decreases. 
 
 \begin{table}[H]
 \centering
@@ -203,26 +225,29 @@ Tables 1 and 2, below, show the real and estimated parameters for different samp
 \end{tabular}
 \end{center}
 
+\noindent The estimated parameters stay within 1 decimal of accuracy, until the dataset was reduced to 0.1\% of its original size. This indicates
+that the methods used do not require a massive amount of data to be relatively accurate, and this will be shown in more detail in the 
+misclassification rates.  
 \newpage
-\noindent Tables 3-5, below, show the misclassification rates, and their percent change from the real parameters 
-rates for each sample size. As shown by the tables, there is only negligible difference in the rates until the 
-sample size reaches 0.1\% of the original. The difference is most significant in the set that contains only 0.01\% 
-of the original training data.  
+\noindent Tables 3-5, below, show the misclassification rates for each sample size. As shown by the tables, there is only negligible difference in the rates until the 
+sample size reaches 0.1\% of the original dataset size. The difference is most significant in the set that contains only 0.01\% 
+of the original training data, with a 42.83\% increase in the total misclassification rate, going from 1.5620\% for 
+the real parameters, to 2.2310\% for the estimated parameters. 
 
 \begin{table}[H]
 \centering
 \small
 \caption{W1 Misclassification Rates}
 \vspace{0.5em}
-\begin{tabular}{cccccc}
+\begin{tabular}{cccc}
 \toprule
-\textbf{Sample Size} & \textbf{Real Params} & \textbf{Estimated Params} & \textbf{\% Change (Est)} & \textbf{Zeroed Diag} & \textbf{\% Change (Zeroed)} \\
+\textbf{Sample Size} & \textbf{Real Params} & \textbf{Estimated Params} & \textbf{Zeroed Diag} \\
 \midrule
-\textbf{0.01\%} & 2.7883\% & 6.6500\% & \cellcolor{greatworsened}\color{white} +138.49\% & 4.7517\% & \cellcolor{greatworsened}\color{white} +70.41\% \\
-\textbf{0.1\%} & 2.7883\% & 1.8400\% & \cellcolor{greatimproved} -34.01\% & 1.8150\% & \cellcolor{greatimproved} -34.91\% \\
-\textbf{1\%} & 2.7883\% & 2.7483\% & \cellcolor{improved} -1.43\% & 2.7400\% & \cellcolor{improved} -1.73\% \\
-\textbf{10\%} & 2.7883\% & 2.9417\% & \cellcolor{greatworsened}\color{white} +5.50\% & 2.8617\% & \cellcolor{worsened} +2.63\% \\
-\textbf{100\%} & 2.7883\% & 2.7683\% & \cellcolor{improved} -0.72\% & 2.7767\% & \cellcolor{negchange} -0.42\% \\
+\textbf{0.01\%} & 2.7883\% & 6.6500\% & 4.7517\% \\
+\textbf{0.1\%} & 2.7883\% & 1.8400\% & 1.8150\% \\
+\textbf{1\%} & 2.7883\% & 2.7483\% & 2.7400\% \\
+\textbf{10\%} & 2.7883\% & 2.9417\% & 2.8617\% \\
+\textbf{100\%} & 2.7883\% & 2.7683\% & 2.7767\% \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -232,15 +257,15 @@ of the original training data.
 \small
 \caption{W2 Misclassification Rates}
 \vspace{0.5em}
-\begin{tabular}{cccccc}
+\begin{tabular}{cccc}
 \toprule
-\textbf{Sample Size} & \textbf{Real Params} & \textbf{Estimated Params} & \textbf{\% Change (Est)} & \textbf{Zeroed Diag} & \textbf{\% Change (Zeroed)} \\
+\textbf{Sample Size} & \textbf{Real Params} & \textbf{Estimated Params} & \textbf{Zeroed Diag} \\
 \midrule
-\textbf{0.01\%} & 1.0364\% & 0.3371\% & \cellcolor{greatimproved} -67.47\% & 0.6093\% & \cellcolor{greatimproved} -41.21\% \\
-\textbf{0.1\%} & 1.0364\% & 1.6236\% & \cellcolor{greatworsened}\color{white} +56.65\% & 1.6400\% & \cellcolor{greatworsened}\color{white} +58.24\% \\
-\textbf{1\%} & 1.0364\% & 1.0486\% & \cellcolor{worsened} +1.17\% & 1.0536\% & \cellcolor{worsened} +1.65\% \\
-\textbf{10\%} & 1.0364\% & 0.9814\% & \cellcolor{greatimproved} -5.31\% & 1.0071\% & \cellcolor{improved} -2.83\% \\
-\textbf{100\%} & 1.0364\% & 1.0429\% & \cellcolor{worsened} +0.62\% & 1.0407\% & \cellcolor{negchange} +0.41\% \\
+\textbf{0.01\%} & 1.0364\% & 0.3371\% & 0.6093\% \\
+\textbf{0.1\%} & 1.0364\% & 1.6236\% & 1.6400\% \\
+\textbf{1\%} & 1.0364\% & 1.0486\% & 1.0536\% \\
+\textbf{10\%} & 1.0364\% & 0.9814\% & 1.0071\% \\
+\textbf{100\%} & 1.0364\% & 1.0429\% & 1.0407\% \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -250,32 +275,36 @@ of the original training data.
 \small
 \caption{Total Misclassification Rates}
 \vspace{0.5em}
-\begin{tabular}{cccccc}
+\begin{tabular}{cccc}
 \toprule
-\textbf{Sample Size} & \textbf{Real Params} & \textbf{Estimated Params} & \textbf{\% Change (Est)} & \textbf{Zeroed Diag} & \textbf{\% Change (Zeroed)} \\
+\textbf{Sample Size} & \textbf{Real Params} & \textbf{Estimated Params} & \textbf{Zeroed Diag} \\
 \midrule
-\textbf{0.01\%} & 1.5620\% & 2.2310\% & \cellcolor{greatworsened}\color{white} +42.83\% & 1.8520\% & \cellcolor{greatworsened}\color{white} +18.57\% \\
-\textbf{0.1\%} & 1.5620\% & 1.6885\% & \cellcolor{greatworsened}\color{white} +8.10\% & 1.6925\% & \cellcolor{greatworsened}\color{white} +8.35\% \\
-\textbf{1\%} & 1.5620\% & 1.5585\% & \cellcolor{negchange} -0.22\% & 1.5595\% & \cellcolor{negchange} -0.16\% \\
-\textbf{10\%} & 1.5620\% & 1.5695\% & \cellcolor{negchange} +0.48\% & 1.5635\% & \cellcolor{negchange} +0.10\% \\
-\textbf{100\%} & 1.5620\% & 1.5605\% & \cellcolor{negchange} -0.10\% & 1.5615\% & \cellcolor{negchange} -0.03\% \\
+\textbf{0.01\%} & 1.5620\% & 2.2310\% & 1.8520\% \\
+\textbf{0.1\%} & 1.5620\% & 1.6885\% & 1.6925\% \\
+\textbf{1\%} & 1.5620\% & 1.5585\% & 1.5595\% \\
+\textbf{10\%} & 1.5620\% & 1.5695\% & 1.5635\% \\
+\textbf{100\%} & 1.5620\% & 1.5605\% & 1.5615\% \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\begin{center}
-\textbf{Misclassification Legend} \\
-\begin{tabular}{|l|l|}
-\hline
-\cellcolor{negchange} & Negligible change (+/- 0.5\%) \\ \hline
-\cellcolor{improved} & Rate improved (< -0.5\%) \\ \hline
-\cellcolor{greatimproved} & Rate greatly improved (< -5\%) \\ \hline
-\cellcolor{worsened} & Rate worsened (> +0.5\%) \\ \hline
-\cellcolor{greatworsened} & Rate greatly worsened (> +5\%) \\ \hline
-\end{tabular}
-\end{center}
+The tables show a marginal decrease in the misclassification rate for the 0.01\% sample size when the non-diagonal values of the estimated covariance matrix are zero'd out, 
+reducing the rate from 2.23\% to 1.85\%. This indicates that with a small number of data, zeroing out the non-diagonal values of the estimated covariance matrix could 
+improve performance slightly, however this would likely depend on the actual parameters. 
 
 \subsection{Experiment 2}\label{experiment-2-1}
+\noindent For this experiment, the data was generated in the same manner as experiment 1, using the following parameters in Eq. 9: 
+
+\begin{equation}
+\mu_{1} = \begin{bmatrix} 1 \\ 1 \end{bmatrix}, 
+\quad \Sigma_{1} = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}, 
+\quad \mu_{2} = \begin{bmatrix} 4 \\ 4 \end{bmatrix}, 
+\quad \Sigma_{2} = \begin{bmatrix} 4 & 0 \\ 0 & 8 \end{bmatrix}
+\label{eq:exp2_params}
+\end{equation}
+
+\noindent As seen by tables 6-7, below, the results follow a similar pattern to experiment 1, with the parameter values straying further from the true values
+as the sample size decreases. 
 
 \begin{table}[H]
 \centering
@@ -326,20 +355,24 @@ of the original training data.
 \end{tabular}
 \end{center}
 
+\noindent The estimated parameters seem to have a larger margin of error in this experiment as compared to experiment 1. It seems that as the value of the parameters increase 
+(sigma2\_22 is 8, while sigma1\_22 is 1), the magnitude of the error increases as well. 
+
+Tables 8-10, below, show the misclassification rates from the previously described dataset. 
 \begin{table}[H]
 \centering
 \small
 \caption{W1 Misclassification Rates}
 \vspace{0.5em}
-\begin{tabular}{cccccc}
+\begin{tabular}{cccc}
 \toprule
-\textbf{Sample Size} & \textbf{Real Params} & \textbf{Estimated Params} & \textbf{\% Change (Est)} & \textbf{Zeroed Diag} & \textbf{\% Change (Zeroed)} \\
+\textbf{Sample Size} & \textbf{Real Params} & \textbf{Estimated Params} & \textbf{Zeroed Diag} \\
 \midrule
-\textbf{0.01\%} & 8.6083\% & 23.5667\% & \cellcolor{greatworsened}\color{white} +173.77\% & 19.3933\% & \cellcolor{greatworsened}\color{white} +125.29\% \\
-\textbf{0.1\%} & 8.6083\% & 6.4550\% & \cellcolor{greatimproved} -25.01\% & 6.5900\% & \cellcolor{greatimproved} -23.45\% \\
-\textbf{1\%} & 8.6083\% & 8.6733\% & \cellcolor{worsened} +0.76\% & 8.6433\% & \cellcolor{negchange} +0.41\% \\
-\textbf{10\%} & 8.6083\% & 8.6733\% & \cellcolor{worsened} +0.76\% & 8.6033\% & \cellcolor{negchange} -0.06\% \\
-\textbf{100\%} & 8.6083\% & 8.5300\% & \cellcolor{improved} -0.91\% & 8.5367\% & \cellcolor{improved} -0.83\% \\
+\textbf{0.01\%} & 8.6083\% & 23.5667\% & 19.3933\% \\
+\textbf{0.1\%} & 8.6083\% & 6.4550\% & 6.5900\% \\
+\textbf{1\%} & 8.6083\% & 8.6733\% & 8.6433\% \\
+\textbf{10\%} & 8.6083\% & 8.6733\% & 8.6033\% \\
+\textbf{100\%} & 8.6083\% & 8.5300\% & 8.5367\% \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -349,15 +382,15 @@ of the original training data.
 \small
 \caption{W2 Misclassification Rates}
 \vspace{0.5em}
-\begin{tabular}{cccccc}
+\begin{tabular}{cccc}
 \toprule
-\textbf{Sample Size} & \textbf{Real Params} & \textbf{Estimated Params} & \textbf{\% Change (Est)} & \textbf{Zeroed Diag} & \textbf{\% Change (Zeroed)} \\
+\textbf{Sample Size} & \textbf{Real Params} & \textbf{Estimated Params} & \textbf{Zeroed Diag} \\
 \midrule
-\textbf{0.01\%} & 7.2707\% & 4.7950\% & \cellcolor{greatimproved} -34.05\% & 5.3771\% & \cellcolor{greatimproved} -26.04\% \\
-\textbf{0.1\%} & 7.2707\% & 8.4414\% & \cellcolor{greatworsened}\color{white} +16.10\% & 8.3950\% & \cellcolor{greatworsened}\color{white} +15.46\% \\
-\textbf{1\%} & 7.2707\% & 7.2814\% & \cellcolor{negchange} +0.15\% & 7.2900\% & \cellcolor{negchange} +0.27\% \\
-\textbf{10\%} & 7.2707\% & 7.2500\% & \cellcolor{negchange} -0.28\% & 7.2657\% & \cellcolor{negchange} -0.07\% \\
-\textbf{100\%} & 7.2707\% & 7.3057\% & \cellcolor{negchange} +0.48\% & 7.3021\% & \cellcolor{negchange} +0.43\% \\
+\textbf{0.01\%} & 7.2707\% & 4.7950\% & 5.3771\% \\
+\textbf{0.1\%} & 7.2707\% & 8.4414\% & 8.3950\% \\
+\textbf{1\%} & 7.2707\% & 7.2814\% & 7.2900\% \\
+\textbf{10\%} & 7.2707\% & 7.2500\% & 7.2657\% \\
+\textbf{100\%} & 7.2707\% & 7.3057\% & 7.3021\% \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -367,31 +400,22 @@ of the original training data.
 \small
 \caption{Total Misclassification Rates}
 \vspace{0.5em}
-\begin{tabular}{cccccc}
+\begin{tabular}{cccc}
 \toprule
-\textbf{Sample Size} & \textbf{Real Params} & \textbf{Estimated Params} & \textbf{\% Change (Est)} & \textbf{Zeroed Diag} & \textbf{\% Change (Zeroed)} \\
+\textbf{Sample Size} & \textbf{Real Params} & \textbf{Estimated Params} & \textbf{Zeroed Diag} \\
 \midrule
-\textbf{0.01\%} & 7.6720\% & 10.4265\% & \cellcolor{greatworsened}\color{white} +35.90\% & 9.5820\% & \cellcolor{greatworsened}\color{white} +24.90\% \\
-\textbf{0.1\%} & 7.6720\% & 7.8455\% & \cellcolor{worsened} +2.26\% & 7.8535\% & \cellcolor{worsened} +2.37\% \\
-\textbf{1\%} & 7.6720\% & 7.6990\% & \cellcolor{negchange} +0.35\% & 7.6960\% & \cellcolor{negchange} +0.31\% \\
-\textbf{10\%} & 7.6720\% & 7.6770\% & \cellcolor{negchange} +0.07\% & 7.6670\% & \cellcolor{negchange} -0.07\% \\
-\textbf{100\%} & 7.6720\% & 7.6730\% & \cellcolor{negchange} +0.01\% & 7.6725\% & \cellcolor{negchange} +0.01\% \\
+\textbf{0.01\%} & 7.6720\% & 10.4265\% & 9.5820\% \\
+\textbf{0.1\%} & 7.6720\% & 7.8455\% & 7.8535\% \\
+\textbf{1\%} & 7.6720\% & 7.6990\% & 7.6960\% \\
+\textbf{10\%} & 7.6720\% & 7.6770\% & 7.6670\% \\
+\textbf{100\%} & 7.6720\% & 7.6730\% & 7.6725\% \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\begin{center}
-\textbf{Misclassification Legend} \\
-\begin{tabular}{|l|l|}
-\hline
-\cellcolor{negchange} & Negligible change (+/- 0.5\%) \\ \hline
-\cellcolor{improved} & Rate improved (< -0.5\%) \\ \hline
-\cellcolor{greatimproved} & Rate greatly improved (< -5\%) \\ \hline
-\cellcolor{worsened} & Rate worsened (> +0.5\%) \\ \hline
-\cellcolor{greatworsened} & Rate greatly worsened (> +5\%) \\ \hline
-\end{tabular}
-\end{center}
-
+\noindent In this experiment, there was a more significant increase in the error of the 0.01\% dataset, rising to 10.43\% as compared to the real parameters 
+error of 7.67\%, almost a 3\% increase. Zeroing out the non-diagonal values provided a similar performance gain as in experiment 1, taking into account the 
+difference in the original error rate, reducing the error by almost 1\%, as opposed to around 0.4\% in experiment 1. 
 \subsection{Experiment 3}\label{experiment-3-1}
 
 \end{document}

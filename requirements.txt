@@ -1,5 +1,6 @@
 numpy
 matplotlib
+opencv-python
 tabulate
 rich
 # CuPy GPU acceleration — install the version matching your CUDA toolkit:

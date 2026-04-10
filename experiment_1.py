@@ -14,39 +14,17 @@ if args.cpu:
     os.environ["FORCE_CPU"] = "1"
 
 # Project imports — classifier.py / estimation.py see FORCE_CPU here
-import numpy as np_cpu
-from classifier import bayesian_case_3, bayesian_case_1
-from estimation import ml_estimation
-from display_helpers import (
+from theory.classifier import bayesian_case_3
+from theory.estimation import ml_estimation
+from helpers.display_helpers import (
     console, build_param_table, build_rate_table,
     param_legend, rate_legend, with_legend, Group, Rule,
 )
+from helpers.startup_helpers import select_array_module
 
 warnings.filterwarnings("ignore", category=FutureWarning, module="cupy")
 
-if args.cpu:
-    import numpy as xp
-    print("Using NumPy (CPU) — forced via --cpu")
-elif args.gpu:
-    try:
-        import cupy as xp
-        xp.linalg.cholesky(xp.eye(2, dtype=float))  # validates cublas
-        print("Using CuPy (GPU) — forced via --gpu")
-    except Exception as e:
-        print(f"GPU requested but CuPy is unavailable: {e}")
-        print("Check your CUDA version:  nvcc --version")
-        print("Install matching CuPy:    pip install cupy-cuda11x  (CUDA 11.x)")
-        print("                       or pip install cupy-cuda12x  (CUDA 12.x)")
-        print("Or run on CPU:            python experiment_1.py --cpu")
-        raise SystemExit(1)
-else:
-    try:
-        import cupy as xp
-        xp.linalg.cholesky(xp.eye(2, dtype=float))  # validates cublas
-        print("GPU detected — using CuPy")
-    except Exception:
-        import numpy as xp
-        print("No GPU detected — using NumPy")
+xp = select_array_module(args)
 
 # set seed for consistent results
 xp.random.seed(42)

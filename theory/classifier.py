@@ -86,3 +86,23 @@ def bayesian_case_3(mu1, mu2, sigma1, sigma2, w1_data: np.array, w2_data: np.arr
     g_2 = x_W2_x + w2_t_x + w_20
 
     return xp.where(g_1 > g_2, 1, 2)
+
+def bayesian_case_3_img(mu, sigma, instances):
+    """
+    Classifies a batch of instances.
+    instances: (N, D) array
+    Returns: (N,) integer array — 1 if class 1, 2 if class 2
+    """
+
+    denom = ((2 * math.pi) ** (instances.shape[1]/2)) * (np.linalg.det(sigma) ** 0.5)
+    x_centered = instances - mu
+
+    inv_s = np.linalg.inv(sigma)
+    x_c_s = (instances @ inv_s * instances).sum(axis=1)
+
+    g = np.exp(- 0.5 * x_c_s) / denom
+    print(g)
+    t = 3
+    return g > t
+
+# print(bayesian_case_3_img(np.array([1, 1]), np.array([[1, 0], [0, 1]]), np.array([[1, 1], [2, 2]])))
