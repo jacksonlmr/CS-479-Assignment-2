@@ -1,8 +1,9 @@
 import sys
-from rich.console import Console, Group
+from rich.console import Console
 from rich.table import Table
-from rich.rule import Rule
 from rich import box
+import matplotlib.pyplot as plt
+import numpy as np
 
 sys.stdout.reconfigure(encoding='utf-8')
 console = Console(width=220, legacy_windows=False)
@@ -112,3 +113,51 @@ def build_rate_table(title, real_rate, idx, fractions, estimated_miss_rates, zer
             fmt_rate(z[idx]), rich_delta(real_rate, z[idx]),
         )
     return t
+
+
+def plot_roc(t_values, bayesian_error_results, name):
+    plt.figure()
+    plt.plot(t_values, bayesian_error_results[:, 0], label='FPR')                                                                                                                                                                                                              
+    plt.plot(t_values, bayesian_error_results[:, 1], label='FNR')    
+    fpr_vals = bayesian_error_results[:, 0]                                                                                                                                                                                                                                    
+    fnr_vals = bayesian_error_results[:, 1]                                                                                                                                                                                                                                    
+    
+    # Find where FPR - FNR changes sign (crossing point)                                                                                                                                                                                                                       
+    diff = fpr_vals - fnr_vals                                                                                                                                                                                                                                               
+    idx = np.where(np.diff(np.sign(diff)))[0][0]
+
+    # Linear interpolation for exact t and rate at intersection
+    t0, t1 = t_values[idx], t_values[idx + 1]
+    d0, d1 = diff[idx], diff[idx + 1]
+    t_intersect = t0 - d0 * (t1 - t0) / (d1 - d0)
+    rate_intersect = fpr_vals[idx] + (fpr_vals[idx + 1] - fpr_vals[idx]) * (t_intersect - t0) / (t1 - t0)
+
+    plt.axvline(x=t_intersect, color='gray', linestyle='--')
+    plt.annotate(
+        f't = {t_intersect:.4f}\nrate = {rate_intersect:.4f}',
+        xy=(t_intersect, rate_intersect),
+        xytext=(t_intersect + (t_values[-1] - t_values[0]) * 0.05, rate_intersect),
+        arrowprops=dict(arrowstyle='->'),
+    )                                                                                                                                                                                                   
+    plt.xlabel('Threshold t')                                                                                                                                                                                                                                                  
+    plt.ylabel('Error Rate')                                                                                                                                                                                                                                                   
+    plt.title(f'FPR and FNR vs Threshold ({name})')
+    plt.legend()
+    plt.savefig(f"{name}_roc.jpg")
+
+
+def gen_roc_2(ber_3a, ber_3b, ber_6a, ber_6b, filename):
+    """
+    Plots ROC curves (FPR vs FNR) for part a and part b models on training images 3 and 6.
+    """
+    plt.figure()
+    plt.plot(ber_3a[:, 0], ber_3a[:, 1], label='Training 3 (Part A)')
+    plt.plot(ber_3b[:, 0], ber_3b[:, 1], label='Training 3 (Part B)')
+    plt.plot(ber_6a[:, 0], ber_6a[:, 1], label='Training 6 (Part A)')
+    plt.plot(ber_6b[:, 0], ber_6b[:, 1], label='Training 6 (Part B)')
+    plt.ylim(0, 0.5)
+    plt.xlabel('FPR')
+    plt.ylabel('FNR')
+    plt.title('ROC Curves: Part A vs Part B')
+    plt.legend()
+    plt.savefig(filename)

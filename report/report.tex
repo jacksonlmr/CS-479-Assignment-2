@@ -17,6 +17,7 @@
 \usepackage{xcolor}
 \usepackage{colortbl}
 \usepackage{float}
+\usepackage{subcaption}
 \usepackage{parskip} % paragraph spacing
 \setlength{\parskip}{1em}
 
@@ -417,5 +418,85 @@ Tables 8-10, below, show the misclassification rates from the previously describ
 error of 7.67\%, almost a 3\% increase. Zeroing out the non-diagonal values provided a similar performance gain as in experiment 1, taking into account the 
 difference in the original error rate, reducing the error by almost 1\%, as opposed to around 0.4\% in experiment 1. 
 \subsection{Experiment 3}\label{experiment-3-1}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[t]{0.32\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{../output/training_3.jpg}
+        \caption{Original}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.32\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{../output/training_3_a_result.jpg}
+        \caption{Result A}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.32\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{../output/training_3_b_result.jpg}
+        \caption{Result B}
+    \end{subfigure}
+    \caption{Training 3 Classification Results}
+    \label{fig:training3-results}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[t]{0.32\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{../output/training_6.jpg}
+        \caption{Original}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.32\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{../output/training_6_a_result.jpg}
+        \caption{Result A}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.32\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{../output/training_6_b_result.jpg}
+        \caption{Result B}
+    \end{subfigure}
+    \caption{Training 6 Classification Results}
+    \label{fig:training6-results}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{../output/training_3_a_roc.jpg}
+        \caption{Training 3}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{../output/training_6_a_roc.jpg}
+        \caption{Training 6}
+    \end{subfigure}
+    \caption{ROC Curves --- Result A}
+    \label{fig:roc-a}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{../output/training_3_b_roc.jpg}
+        \caption{Training 3}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{../output/training_6_b_roc.jpg}
+        \caption{Training 6}
+    \end{subfigure}
+    \caption{ROC Curves --- Result B}
+    \label{fig:roc-b}
+\end{figure}
 
 \end{document}

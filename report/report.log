@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.4.8)  9 APR 2026 13:46
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.4.8)  10 APR 2026 17:06
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -224,6 +224,30 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \float@box=\box57
 \@float@everytoks=\toks29
 \@floatcapt=\box58
+) (C:\Users\Jackson\AppData\Local\Programs\MiKTeX\tex/latex/caption\subcaption.sty
+Package: subcaption 2023/07/28 v1.6b Sub-captions (AR)
+ (C:\Users\Jackson\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption.sty
+Package: caption 2023/08/05 v3.6o Customizing captions (AR)
+ (C:\Users\Jackson\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption3.sty
+Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
+\caption@tempdima=\dimen184
+\captionmargin=\dimen185
+\caption@leftmargin=\dimen186
+\caption@rightmargin=\dimen187
+\caption@width=\dimen188
+\caption@indent=\dimen189
+\caption@parindent=\dimen190
+\caption@hangindent=\dimen191
+Package caption Info: Standard document class detected.
+)
+\c@caption@flags=\count306
+\c@continuedfloat=\count307
+Package caption Info: float package is loaded.
+)
+Package caption Info: New subtype `subfigure' on input line 238.
+\c@subfigure=\count308
+Package caption Info: New subtype `subtable' on input line 238.
+\c@subtable=\count309
 ) (C:\Users\Jackson\AppData\Local\Programs\MiKTeX\tex/latex/parskip\parskip.sty
 Package: parskip 2021-03-14 v2.0h non-zero parskip adjustments
  (C:\Users\Jackson\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvoptions.sty
@@ -234,31 +258,31 @@ Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
 Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
 )) (C:\Users\Jackson\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolbox.sty
 Package: etoolbox 2025/10/02 v2.5m e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count306
+\etb@tempcnta=\count310
 ))
-LaTeX Font Info:    Trying to load font information for T1+phv on input line 50.
+LaTeX Font Info:    Trying to load font information for T1+phv on input line 51.
  (C:\Users\Jackson\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\t1phv.fd
 File: t1phv.fd 2020/03/25 scalable font definitions for T1/phv.
 ) (C:\Users\Jackson\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count307
+\l__color_backend_stack_int=\count311
 ) (report.aux)
 \openout1 = `report.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 50.
-LaTeX Font Info:    ... okay on input line 50.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 50.
-LaTeX Font Info:    ... okay on input line 50.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 50.
-LaTeX Font Info:    ... okay on input line 50.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 50.
-LaTeX Font Info:    ... okay on input line 50.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 50.
-LaTeX Font Info:    ... okay on input line 50.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 50.
-LaTeX Font Info:    ... okay on input line 50.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 50.
-LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -296,42 +320,97 @@ LaTeX Font Info:    ... okay on input line 50.
 
 (C:\Users\Jackson\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count308
-\scratchdimen=\dimen184
+\scratchcounter=\count312
+\scratchdimen=\dimen192
 \scratchbox=\box59
-\nofMPsegments=\count309
-\nofMParguments=\count310
+\nofMPsegments=\count313
+\nofMParguments=\count314
 \everyMPshowfont=\toks30
-\MPscratchCnt=\count311
-\MPscratchDim=\dimen185
-\MPnumerator=\count312
-\makeMPintoPDFobject=\count313
+\MPscratchCnt=\count315
+\MPscratchDim=\dimen193
+\MPnumerator=\count316
+\makeMPintoPDFobject=\count317
 \everyMPtoPDFconversion=\toks31
 ) (C:\Users\Jackson\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
  (C:\Users\Jackson\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
-)) [1
+))
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
+ [1
 
-{C:/Users/Jackson/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/Jackson/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}] [1] [2] [3] [4] [5] [6] (report.aux)
+{C:/Users/Jackson/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/Jackson/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}] [1] [2] [3] [4] [5]
+<../output/training_3.jpg, id=28, 1862.96pt x 1397.22pt>
+File: ../output/training_3.jpg Graphic file (type jpg)
+<use ../output/training_3.jpg>
+Package pdftex.def Info: ../output/training_3.jpg  used on input line 426.
+(pdftex.def)             Requested size: 150.32504pt x 112.73927pt.
+<../output/training_3_a_result.jpg, id=29, 1862.96pt x 1397.22pt>
+File: ../output/training_3_a_result.jpg Graphic file (type jpg)
+<use ../output/training_3_a_result.jpg>
+Package pdftex.def Info: ../output/training_3_a_result.jpg  used on input line 432.
+(pdftex.def)             Requested size: 150.32504pt x 112.73927pt.
+<../output/training_3_b_result.jpg, id=30, 1862.96pt x 1397.22pt>
+File: ../output/training_3_b_result.jpg Graphic file (type jpg)
+<use ../output/training_3_b_result.jpg>
+Package pdftex.def Info: ../output/training_3_b_result.jpg  used on input line 438.
+(pdftex.def)             Requested size: 150.32504pt x 112.73927pt.
+<../output/training_6.jpg, id=31, 1862.96pt x 1397.22pt>
+File: ../output/training_6.jpg Graphic file (type jpg)
+<use ../output/training_6.jpg>
+Package pdftex.def Info: ../output/training_6.jpg  used on input line 449.
+(pdftex.def)             Requested size: 150.32504pt x 112.73927pt.
+<../output/training_6_a_result.jpg, id=32, 1862.96pt x 1397.22pt>
+File: ../output/training_6_a_result.jpg Graphic file (type jpg)
+<use ../output/training_6_a_result.jpg>
+Package pdftex.def Info: ../output/training_6_a_result.jpg  used on input line 455.
+(pdftex.def)             Requested size: 150.32504pt x 112.73927pt.
+<../output/training_6_b_result.jpg, id=33, 1862.96pt x 1397.22pt>
+File: ../output/training_6_b_result.jpg Graphic file (type jpg)
+<use ../output/training_6_b_result.jpg>
+Package pdftex.def Info: ../output/training_6_b_result.jpg  used on input line 461.
+(pdftex.def)             Requested size: 150.32504pt x 112.73927pt.
+<../output/training_3_a_roc.jpg, id=34, 462.528pt x 346.896pt>
+File: ../output/training_3_a_roc.jpg Graphic file (type jpg)
+<use ../output/training_3_a_roc.jpg>
+Package pdftex.def Info: ../output/training_3_a_roc.jpg  used on input line 472.
+(pdftex.def)             Requested size: 225.4804pt x 169.11243pt.
+<../output/training_6_a_roc.jpg, id=35, 462.528pt x 346.896pt>
+File: ../output/training_6_a_roc.jpg Graphic file (type jpg)
+<use ../output/training_6_a_roc.jpg>
+Package pdftex.def Info: ../output/training_6_a_roc.jpg  used on input line 478.
+(pdftex.def)             Requested size: 225.4804pt x 169.11243pt.
+ [6 <../output/training_3.jpg> <../output/training_3_a_result.jpg> <../output/training_3_b_result.jpg> <../output/training_6.jpg> <../output/training_6_a_result.jpg> <../output/training_6_b_result.jpg>]
+<../output/training_3_b_roc.jpg, id=40, 462.528pt x 346.896pt>
+File: ../output/training_3_b_roc.jpg Graphic file (type jpg)
+<use ../output/training_3_b_roc.jpg>
+Package pdftex.def Info: ../output/training_3_b_roc.jpg  used on input line 489.
+(pdftex.def)             Requested size: 225.4804pt x 169.11243pt.
+<../output/training_6_b_roc.jpg, id=41, 462.528pt x 346.896pt>
+File: ../output/training_6_b_roc.jpg Graphic file (type jpg)
+<use ../output/training_6_b_roc.jpg>
+Package pdftex.def Info: ../output/training_6_b_roc.jpg  used on input line 495.
+(pdftex.def)             Requested size: 225.4804pt x 169.11243pt.
+ [7 <../output/training_3_a_roc.jpg> <../output/training_6_a_roc.jpg> <../output/training_3_b_roc.jpg> <../output/training_6_b_roc.jpg>] (report.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 5546 strings out of 467871
- 87749 string characters out of 5417409
- 553627 words of memory out of 5000000
- 34344 multiletter control sequences out of 15000+600000
+ 7076 strings out of 467871
+ 118621 string characters out of 5417409
+ 570278 words of memory out of 5000000
+ 35865 multiletter control sequences out of 15000+600000
  658159 words of font info for 70 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 57i,10n,65p,585b,292s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 67i,10n,77p,585b,501s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Jackson/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/Jackson/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Jackson/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/Jackson/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Jackson/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/Jackson/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Jackson/AppData/Local/Programs/MiKTeX/fonts/type1/urw/helvetic/uhvb8a.pfb><C:/Users/Jackson/AppData/Local/Programs/MiKTeX/fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on report.pdf (7 pages, 101011 bytes).
+Output written on report.pdf (8 pages, 4897689 bytes).
 PDF statistics:
- 67 PDF objects out of 1000 (max. 8388607)
+ 80 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 51 words of extra memory for PDF output out of 10000 (max. 10000000)
 
