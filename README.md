@@ -1,5 +1,6 @@
 # CS-479-Assignment-2
 
+## [Report][report/report.pdf]
 ## Running Code
 
 Create a Python virtual environment:
@@ -45,7 +46,7 @@ python gpu_check.py
 
 If you see a `DLL load failed` error, the installed cupy version does not match your CUDA toolkit — uninstall cupy and reinstall with the correct version above, or use `--cpu`.
 
-## Running the Experiment
+## Running the Experiments
 
 Install dependencies:
 
