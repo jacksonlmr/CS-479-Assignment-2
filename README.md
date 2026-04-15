@@ -1,6 +1,6 @@
 # CS-479-Assignment-2
 
-## [Report][report/report.pdf]
+## [Report](report/report.pdf)
 ## Running Code
 
 Create a Python virtual environment:
