@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.4.8)  10 APR 2026 17:06
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.4.8)  11 APR 2026 11:48
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -341,76 +341,93 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
  [1
 
-{C:/Users/Jackson/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/Jackson/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}] [1] [2] [3] [4] [5]
-<../output/training_3.jpg, id=28, 1862.96pt x 1397.22pt>
+{C:/Users/Jackson/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/Jackson/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}] [1] [2] [3] [4]
+<../output/training_1.jpg, id=25, 1862.96pt x 1397.22pt>
+File: ../output/training_1.jpg Graphic file (type jpg)
+<use ../output/training_1.jpg>
+Package pdftex.def Info: ../output/training_1.jpg  used on input line 476.
+(pdftex.def)             Requested size: 187.89914pt x 140.92409pt.
+<../output/ref1.jpg, id=26, 1862.96pt x 1397.22pt>
+File: ../output/ref1.jpg Graphic file (type jpg)
+<use ../output/ref1.jpg>
+Package pdftex.def Info: ../output/ref1.jpg  used on input line 481.
+(pdftex.def)             Requested size: 187.89914pt x 140.92409pt.
+ [5]
+<../output/part_a_roc.jpg, id=30, 462.528pt x 346.896pt>
+File: ../output/part_a_roc.jpg Graphic file (type jpg)
+<use ../output/part_a_roc.jpg>
+Package pdftex.def Info: ../output/part_a_roc.jpg  used on input line 499.
+(pdftex.def)             Requested size: 225.4804pt x 169.11243pt.
+<../output/part_b_roc.jpg, id=31, 462.528pt x 346.896pt>
+File: ../output/part_b_roc.jpg Graphic file (type jpg)
+<use ../output/part_b_roc.jpg>
+Package pdftex.def Info: ../output/part_b_roc.jpg  used on input line 504.
+(pdftex.def)             Requested size: 225.4804pt x 169.11243pt.
+<../output/training_3.jpg, id=32, 1862.96pt x 1397.22pt>
 File: ../output/training_3.jpg Graphic file (type jpg)
 <use ../output/training_3.jpg>
-Package pdftex.def Info: ../output/training_3.jpg  used on input line 426.
-(pdftex.def)             Requested size: 150.32504pt x 112.73927pt.
-<../output/training_3_a_result.jpg, id=29, 1862.96pt x 1397.22pt>
+Package pdftex.def Info: ../output/training_3.jpg  used on input line 520.
+(pdftex.def)             Requested size: 164.41711pt x 123.29259pt.
+<../output/ref3.jpg, id=33, 1862.96pt x 1397.22pt>
+File: ../output/ref3.jpg Graphic file (type jpg)
+<use ../output/ref3.jpg>
+Package pdftex.def Info: ../output/ref3.jpg  used on input line 525.
+(pdftex.def)             Requested size: 164.41711pt x 123.29259pt.
+<../output/training_3_a_result.jpg, id=34, 1862.96pt x 1397.22pt>
 File: ../output/training_3_a_result.jpg Graphic file (type jpg)
 <use ../output/training_3_a_result.jpg>
-Package pdftex.def Info: ../output/training_3_a_result.jpg  used on input line 432.
-(pdftex.def)             Requested size: 150.32504pt x 112.73927pt.
-<../output/training_3_b_result.jpg, id=30, 1862.96pt x 1397.22pt>
+Package pdftex.def Info: ../output/training_3_a_result.jpg  used on input line 531.
+(pdftex.def)             Requested size: 164.41711pt x 123.29259pt.
+<../output/training_3_b_result.jpg, id=35, 1862.96pt x 1397.22pt>
 File: ../output/training_3_b_result.jpg Graphic file (type jpg)
 <use ../output/training_3_b_result.jpg>
-Package pdftex.def Info: ../output/training_3_b_result.jpg  used on input line 438.
-(pdftex.def)             Requested size: 150.32504pt x 112.73927pt.
-<../output/training_6.jpg, id=31, 1862.96pt x 1397.22pt>
+Package pdftex.def Info: ../output/training_3_b_result.jpg  used on input line 536.
+(pdftex.def)             Requested size: 164.41711pt x 123.29259pt.
+ [6 <../output/training_1.jpg> <../output/ref1.jpg> <../output/part_a_roc.jpg> <../output/part_b_roc.jpg>]
+<../output/training_6.jpg, id=40, 1862.96pt x 1397.22pt>
 File: ../output/training_6.jpg Graphic file (type jpg)
 <use ../output/training_6.jpg>
-Package pdftex.def Info: ../output/training_6.jpg  used on input line 449.
-(pdftex.def)             Requested size: 150.32504pt x 112.73927pt.
-<../output/training_6_a_result.jpg, id=32, 1862.96pt x 1397.22pt>
+Package pdftex.def Info: ../output/training_6.jpg  used on input line 547.
+(pdftex.def)             Requested size: 164.41711pt x 123.29259pt.
+<../output/ref6.jpg, id=41, 1862.96pt x 1397.22pt>
+File: ../output/ref6.jpg Graphic file (type jpg)
+<use ../output/ref6.jpg>
+Package pdftex.def Info: ../output/ref6.jpg  used on input line 552.
+(pdftex.def)             Requested size: 164.41711pt x 123.29259pt.
+<../output/training_6_a_result.jpg, id=42, 1862.96pt x 1397.22pt>
 File: ../output/training_6_a_result.jpg Graphic file (type jpg)
 <use ../output/training_6_a_result.jpg>
-Package pdftex.def Info: ../output/training_6_a_result.jpg  used on input line 455.
-(pdftex.def)             Requested size: 150.32504pt x 112.73927pt.
-<../output/training_6_b_result.jpg, id=33, 1862.96pt x 1397.22pt>
+Package pdftex.def Info: ../output/training_6_a_result.jpg  used on input line 558.
+(pdftex.def)             Requested size: 164.41711pt x 123.29259pt.
+<../output/training_6_b_result.jpg, id=43, 1862.96pt x 1397.22pt>
 File: ../output/training_6_b_result.jpg Graphic file (type jpg)
 <use ../output/training_6_b_result.jpg>
-Package pdftex.def Info: ../output/training_6_b_result.jpg  used on input line 461.
-(pdftex.def)             Requested size: 150.32504pt x 112.73927pt.
-<../output/training_3_a_roc.jpg, id=34, 462.528pt x 346.896pt>
-File: ../output/training_3_a_roc.jpg Graphic file (type jpg)
-<use ../output/training_3_a_roc.jpg>
-Package pdftex.def Info: ../output/training_3_a_roc.jpg  used on input line 472.
+Package pdftex.def Info: ../output/training_6_b_result.jpg  used on input line 563.
+(pdftex.def)             Requested size: 164.41711pt x 123.29259pt.
+ [7 <../output/training_3.jpg> <../output/ref3.jpg> <../output/training_3_a_result.jpg> <../output/training_3_b_result.jpg> <../output/training_6.jpg> <../output/ref6.jpg> <../output/training_6_a_result.jpg> <../output/training_6_b_result.jpg>]
+<../output/a_b_roc_curves.jpg, id=47, 462.528pt x 346.896pt>
+File: ../output/a_b_roc_curves.jpg Graphic file (type jpg)
+<use ../output/a_b_roc_curves.jpg>
+Package pdftex.def Info: ../output/a_b_roc_curves.jpg  used on input line 577.
 (pdftex.def)             Requested size: 225.4804pt x 169.11243pt.
-<../output/training_6_a_roc.jpg, id=35, 462.528pt x 346.896pt>
-File: ../output/training_6_a_roc.jpg Graphic file (type jpg)
-<use ../output/training_6_a_roc.jpg>
-Package pdftex.def Info: ../output/training_6_a_roc.jpg  used on input line 478.
-(pdftex.def)             Requested size: 225.4804pt x 169.11243pt.
- [6 <../output/training_3.jpg> <../output/training_3_a_result.jpg> <../output/training_3_b_result.jpg> <../output/training_6.jpg> <../output/training_6_a_result.jpg> <../output/training_6_b_result.jpg>]
-<../output/training_3_b_roc.jpg, id=40, 462.528pt x 346.896pt>
-File: ../output/training_3_b_roc.jpg Graphic file (type jpg)
-<use ../output/training_3_b_roc.jpg>
-Package pdftex.def Info: ../output/training_3_b_roc.jpg  used on input line 489.
-(pdftex.def)             Requested size: 225.4804pt x 169.11243pt.
-<../output/training_6_b_roc.jpg, id=41, 462.528pt x 346.896pt>
-File: ../output/training_6_b_roc.jpg Graphic file (type jpg)
-<use ../output/training_6_b_roc.jpg>
-Package pdftex.def Info: ../output/training_6_b_roc.jpg  used on input line 495.
-(pdftex.def)             Requested size: 225.4804pt x 169.11243pt.
- [7 <../output/training_3_a_roc.jpg> <../output/training_6_a_roc.jpg> <../output/training_3_b_roc.jpg> <../output/training_6_b_roc.jpg>] (report.aux)
+ [8 <../output/a_b_roc_curves.jpg>] (report.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 7076 strings out of 467871
- 118621 string characters out of 5417409
- 570278 words of memory out of 5000000
- 35865 multiletter control sequences out of 15000+600000
- 658159 words of font info for 70 fonts, out of 8000000 for 9000
+ 7108 strings out of 467871
+ 119188 string characters out of 5417409
+ 571669 words of memory out of 5000000
+ 35897 multiletter control sequences out of 15000+600000
+ 661631 words of font info for 72 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 67i,10n,77p,585b,501s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 67i,10n,77p,585b,507s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Jackson/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/Jackson/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Jackson/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/Jackson/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Jackson/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/Jackson/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Jackson/AppData/Local/Programs/MiKTeX/fonts/type1/urw/helvetic/uhvb8a.pfb><C:/Users/Jackson/AppData/Local/Programs/MiKTeX/fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on report.pdf (8 pages, 4897689 bytes).
+Output written on report.pdf (9 pages, 6183605 bytes).
 PDF statistics:
- 80 PDF objects out of 1000 (max. 8388607)
+ 86 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 51 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 66 words of extra memory for PDF output out of 10000 (max. 10000000)
 

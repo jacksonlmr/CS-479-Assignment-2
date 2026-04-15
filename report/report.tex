@@ -156,8 +156,52 @@ respectively:
 \end{equation}
 
 \subsection{Experiment 3}\label{experiment-3}
+\subsubsection{Error Rates}\label{Error Rates}
+Two widely used error rates are the False Positive Rate (FPR) and the False Negative Rate (FNR). These rates are defined in Eq. 8,
+below:
 
-\newpage
+\begin{equation}
+\text{FPR} = \frac{FP}{FP + TN}, \qquad \text{FNR} = \frac{FN}{FN + TP}
+\label{eq:1.8}
+\end{equation}
+
+Where FP is the total count of False Positives, TN is the total count of True Negatives, FN is the total count of False 
+Negatives, and TP is the total count of True Positives. These rates can be used to help quantify the performance 
+of a given classifier. These rates can be plotted against each other on the same graph, with Error Rate as the y-axis 
+and a theshold value, t, as the x-axis. The value of t at which the lines intersect on this graph is known as the 
+Equal Error Rate (EER), which is commonly used to choose a value for the parameter t. 
+
+\subsubsection{ROC Curves}\label{ROC Curves}
+Receiver Operator Characteristic (ROC) Curves are a method to compare different thresholds for a single classifier. They can also
+be used to compare multiple classifiers that are attempting to classify the same states of nature. The most commonly used ROC curve is 
+obtained by plotting the FPR against the FNR, and the classifier that minimizes the area under this curve would would be considered
+the better performing classifier. 
+
+\subsubsection{Color Spaces}\label{Color Spaces}
+The standard encoding used in most color images is RGB, which is a method that stores 3 values for each pixel in an image. 
+The three values encode the red, green, and blue parts of the pixels color. This method works well for encoding images
+and displaying them for humans, but is not the most ideal for classifying skin color in an image. Instead, one can convert
+RGB values to a different chromatic space. The normalized RGB space, shown below in Eq. 9, removes the luminance component 
+from the representation by dividing by the total intensity of the pixel value:
+
+\begin{equation}
+r = \frac{R}{R + G + B}, \qquad g = \frac{G}{R + G + B}
+\label{eq:chromatic1}
+\end{equation}
+
+The YCbCr color space, on the other hand, does not discard the luminance component, but instead separates it. For skin classification
+purpose, the Y component can be discarded to classify based only on color information. The method for converting to this space 
+is shown below in Eq. 10:
+
+\begin{equation}
+\begin{aligned}
+Y  &= 0.299R + 0.587G + 0.114B \\
+C_b &= -0.169R - 0.332G + 0.500B \\
+C_r &= 0.500R - 0.419G - 0.081B
+\end{aligned}
+\label{eq:chromatic2}
+\end{equation}
+
 \section{Results and Discussion}\label{results-and-discussion}
 
 \subsection{Experiment 1}\label{experiment-1-1}
@@ -181,7 +225,7 @@ progressively farther away from the true parameters as the sample size decreases
 \centering
 \small
 \caption{Class 1 - Estimated Parameters vs. True Parameters}
-\vspace{0.5em}
+\vspace{-0.4em}
 \begin{tabular}{ccccccc}
 \toprule
 \textbf{Sample} & \textbf{mu1\_x} & \textbf{mu1\_y} & \textbf{sigma1\_11} & \textbf{sigma1\_12} & \textbf{sigma1\_21} & \textbf{sigma1\_22} \\
@@ -200,7 +244,7 @@ progressively farther away from the true parameters as the sample size decreases
 \centering
 \small
 \caption{Class 2 - Estimated Parameters vs. True Parameters}
-\vspace{0.5em}
+\vspace{-0.4em}
 \begin{tabular}{ccccccc}
 \toprule
 \textbf{Sample} & \textbf{mu2\_x} & \textbf{mu2\_y} & \textbf{sigma2\_11} & \textbf{sigma2\_12} & \textbf{sigma2\_21} & \textbf{sigma2\_22} \\
@@ -229,7 +273,7 @@ progressively farther away from the true parameters as the sample size decreases
 \noindent The estimated parameters stay within 1 decimal of accuracy, until the dataset was reduced to 0.1\% of its original size. This indicates
 that the methods used do not require a massive amount of data to be relatively accurate, and this will be shown in more detail in the 
 misclassification rates.  
-\newpage
+
 \noindent Tables 3-5, below, show the misclassification rates for each sample size. As shown by the tables, there is only negligible difference in the rates until the 
 sample size reaches 0.1\% of the original dataset size. The difference is most significant in the set that contains only 0.01\% 
 of the original training data, with a 42.83\% increase in the total misclassification rate, going from 1.5620\% for 
@@ -239,7 +283,7 @@ the real parameters, to 2.2310\% for the estimated parameters.
 \centering
 \small
 \caption{W1 Misclassification Rates}
-\vspace{0.5em}
+\vspace{-0.4em}
 \begin{tabular}{cccc}
 \toprule
 \textbf{Sample Size} & \textbf{Real Params} & \textbf{Estimated Params} & \textbf{Zeroed Diag} \\
@@ -257,7 +301,7 @@ the real parameters, to 2.2310\% for the estimated parameters.
 \centering
 \small
 \caption{W2 Misclassification Rates}
-\vspace{0.5em}
+\vspace{-0.4em}
 \begin{tabular}{cccc}
 \toprule
 \textbf{Sample Size} & \textbf{Real Params} & \textbf{Estimated Params} & \textbf{Zeroed Diag} \\
@@ -275,7 +319,7 @@ the real parameters, to 2.2310\% for the estimated parameters.
 \centering
 \small
 \caption{Total Misclassification Rates}
-\vspace{0.5em}
+\vspace{-0.4em}
 \begin{tabular}{cccc}
 \toprule
 \textbf{Sample Size} & \textbf{Real Params} & \textbf{Estimated Params} & \textbf{Zeroed Diag} \\
@@ -294,7 +338,7 @@ reducing the rate from 2.23\% to 1.85\%. This indicates that with a small number
 improve performance slightly, however this would likely depend on the actual parameters. 
 
 \subsection{Experiment 2}\label{experiment-2-1}
-\noindent For this experiment, the data was generated in the same manner as experiment 1, using the following parameters in Eq. 9: 
+\noindent For this experiment, the data was generated in the same manner as experiment 1, using the following parameters in Eq. \ref{eq:exp2_params}: 
 
 \begin{equation}
 \mu_{1} = \begin{bmatrix} 1 \\ 1 \end{bmatrix}, 
@@ -311,7 +355,7 @@ as the sample size decreases.
 \centering
 \small
 \caption{Class 1 - Estimated Parameters vs. True Parameters}
-\vspace{0.5em}
+\vspace{-0.4em}
 \begin{tabular}{ccccccc}
 \toprule
 \textbf{Sample} & \textbf{mu1\_x} & \textbf{mu1\_y} & \textbf{sigma1\_11} & \textbf{sigma1\_12} & \textbf{sigma1\_21} & \textbf{sigma1\_22} \\
@@ -330,7 +374,7 @@ as the sample size decreases.
 \centering
 \small
 \caption{Class 2 - Estimated Parameters vs. True Parameters}
-\vspace{0.5em}
+\vspace{-0.4em}
 \begin{tabular}{ccccccc}
 \toprule
 \textbf{Sample} & \textbf{mu2\_x} & \textbf{mu2\_y} & \textbf{sigma2\_11} & \textbf{sigma2\_12} & \textbf{sigma2\_21} & \textbf{sigma2\_22} \\
@@ -364,7 +408,7 @@ Tables 8-10, below, show the misclassification rates from the previously describ
 \centering
 \small
 \caption{W1 Misclassification Rates}
-\vspace{0.5em}
+\vspace{-0.4em}
 \begin{tabular}{cccc}
 \toprule
 \textbf{Sample Size} & \textbf{Real Params} & \textbf{Estimated Params} & \textbf{Zeroed Diag} \\
@@ -382,7 +426,7 @@ Tables 8-10, below, show the misclassification rates from the previously describ
 \centering
 \small
 \caption{W2 Misclassification Rates}
-\vspace{0.5em}
+\vspace{-0.4em}
 \begin{tabular}{cccc}
 \toprule
 \textbf{Sample Size} & \textbf{Real Params} & \textbf{Estimated Params} & \textbf{Zeroed Diag} \\
@@ -400,7 +444,7 @@ Tables 8-10, below, show the misclassification rates from the previously describ
 \centering
 \small
 \caption{Total Misclassification Rates}
-\vspace{0.5em}
+\vspace{-0.4em}
 \begin{tabular}{cccc}
 \toprule
 \textbf{Sample Size} & \textbf{Real Params} & \textbf{Estimated Params} & \textbf{Zeroed Diag} \\
@@ -419,21 +463,75 @@ error of 7.67\%, almost a 3\% increase. Zeroing out the non-diagonal values prov
 difference in the original error rate, reducing the error by almost 1\%, as opposed to around 0.4\% in experiment 1. 
 \subsection{Experiment 3}\label{experiment-3-1}
 
+\noindent In this experiment, I used Maximum Likelihood (ML) estimation to estimate the parameters of the distribution of skin color, 
+for the purpose of segmenting out peoples faces in an image. To do this, I applied the same ML estimation function used in experiments 1 and 2
+on 1 training image, shown below in Figure 1 (All of the non-black pixels in Figure 1.b are pixels designated as belonging to a persons face). I 
+performed this experiment in two parts, a and b. In part a, I trained and tested the classifier in the normalized RGB space (shown in Eq. 9), and 
+for part b I trained and tested the classifier in the YCbCr space (shown in Eq. 10). 
+
 \begin{figure}[H]
     \centering
-    \begin{subfigure}[t]{0.32\textwidth}
+    \begin{subfigure}[t]{0.40\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{../output/training_1.jpg}
+        \caption{Training image}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.40\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{../output/ref1.jpg}
+        \caption{Reference image}
+    \end{subfigure}
+    \caption{Training and reference image used for estimation}
+    \label{fig:training_img}
+\end{figure}
+
+To train the classifier, two steps needed to be completed. I needed to estimate the parameters of the distribution (mu and sigma), and 
+I needed to estimate the threshold at which the classifier would determine a pixel to be skin or non-skin. To estimate this 
+parameter t, I ran the classification function with 10,000 different threshold values (ranging from 0 to c, where $c = \dfrac{1}{2\pi |\Sigma|^{1/2}}$,
+and the step size is $\dfrac{c}{10000}$). For each run, I calculated the FPR and FNR, then plotted these rates
+on the graphs shown in Figure 2. The intersection of the FPR and FNR on these plots represent the Equal Error Rate (EOR), and the value of t
+at these intersections is the threshold I used for classification in the next steps. 
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{../output/part_a_roc.jpg}
+        \caption{Part A - Normalized RGB ROC Curve}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{../output/part_b_roc.jpg}
+        \caption{Part B - YCbCr ROC Curve}
+    \end{subfigure}
+    \caption{ROC Curves for Parts A and B}
+    \label{fig:roc-ab}
+\end{figure}
+
+Figure 2 shows that the YCbCr space, used in part b, seems to produce less False Positives than part a. 
+It did, however, seem to produce more False Negatives. To evaluate the performance of the classifier visually, I used
+the t value associated with the EER (given by the intersection of the two plotted lines), and I was able to obtain the 
+results shown below in Figures 3 and 4. 
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[t]{0.35\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../output/training_3.jpg}
         \caption{Original}
     \end{subfigure}
-    \hfill
-    \begin{subfigure}[t]{0.32\textwidth}
+    \begin{subfigure}[t]{0.35\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{../output/ref3.jpg}
+        \caption{Reference}
+    \end{subfigure}
+    \par\smallskip
+    \begin{subfigure}[t]{0.35\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../output/training_3_a_result.jpg}
         \caption{Result A}
     \end{subfigure}
-    \hfill
-    \begin{subfigure}[t]{0.32\textwidth}
+    \begin{subfigure}[t]{0.35\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../output/training_3_b_result.jpg}
         \caption{Result B}
@@ -444,19 +542,23 @@ difference in the original error rate, reducing the error by almost 1\%, as oppo
 
 \begin{figure}[H]
     \centering
-    \begin{subfigure}[t]{0.32\textwidth}
+    \begin{subfigure}[t]{0.35\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../output/training_6.jpg}
         \caption{Original}
     \end{subfigure}
-    \hfill
-    \begin{subfigure}[t]{0.32\textwidth}
+    \begin{subfigure}[t]{0.35\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{../output/ref6.jpg}
+        \caption{Reference}
+    \end{subfigure}
+    \par\smallskip
+    \begin{subfigure}[t]{0.35\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../output/training_6_a_result.jpg}
         \caption{Result A}
     \end{subfigure}
-    \hfill
-    \begin{subfigure}[t]{0.32\textwidth}
+    \begin{subfigure}[t]{0.35\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../output/training_6_b_result.jpg}
         \caption{Result B}
@@ -465,38 +567,20 @@ difference in the original error rate, reducing the error by almost 1\%, as oppo
     \label{fig:training6-results}
 \end{figure}
 
-\begin{figure}[H]
-    \centering
-    \begin{subfigure}[t]{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{../output/training_3_a_roc.jpg}
-        \caption{Training 3}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[t]{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{../output/training_6_a_roc.jpg}
-        \caption{Training 6}
-    \end{subfigure}
-    \caption{ROC Curves --- Result A}
-    \label{fig:roc-a}
-\end{figure}
+As shown in the figures, the YCbCr space classifier seemed to perform better than the normalized RGB space classifier. 
+Its output contained less False Positives, agreeing with the data seen in Figure 2. 
+
+Figure 5, below, shows a comparison of the ROC curve for part a, vs the ROC curve for part b. 
 
 \begin{figure}[H]
     \centering
-    \begin{subfigure}[t]{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{../output/training_3_b_roc.jpg}
-        \caption{Training 3}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[t]{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{../output/training_6_b_roc.jpg}
-        \caption{Training 6}
-    \end{subfigure}
-    \caption{ROC Curves --- Result B}
-    \label{fig:roc-b}
+    \includegraphics[width=0.48\textwidth]{../output/a_b_roc_curves.jpg}
+    \caption{ROC Curves Comparison}
+    \label{fig:roc-combined}
 \end{figure}
+
+As seen in Figure 5, the area under the ROC curve is smaller for Part B than for Part A. This shows that the YCbCr space likely
+performs better overall at separating the luminance from the color information in an image, making it more suitable for 
+segmentation purposes in this experiment. 
 
 \end{document}

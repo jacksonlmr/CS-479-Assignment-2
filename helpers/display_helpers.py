@@ -144,17 +144,16 @@ def plot_roc(t_values, bayesian_error_results, name):
     plt.title(f'FPR and FNR vs Threshold ({name})')
     plt.legend()
     plt.savefig(f"{name}_roc.jpg")
+    return t_intersect
 
 
-def gen_roc_2(ber_3a, ber_3b, ber_6a, ber_6b, filename):
+def plot_roc_2(ber_a, ber_b, filename):
     """
-    Plots ROC curves (FPR vs FNR) for part a and part b models on training images 3 and 6.
+    Plots ROC curves (FPR vs FNR) comparing part a and part b color spaces.
     """
     plt.figure()
-    plt.plot(ber_3a[:, 0], ber_3a[:, 1], label='Training 3 (Part A)')
-    plt.plot(ber_3b[:, 0], ber_3b[:, 1], label='Training 3 (Part B)')
-    plt.plot(ber_6a[:, 0], ber_6a[:, 1], label='Training 6 (Part A)')
-    plt.plot(ber_6b[:, 0], ber_6b[:, 1], label='Training 6 (Part B)')
+    plt.plot(ber_a[:, 0], ber_a[:, 1], label='Part A (Chromatic)')
+    plt.plot(ber_b[:, 0], ber_b[:, 1], label='Part B (YCbCr)')
     plt.ylim(0, 0.5)
     plt.xlabel('FPR')
     plt.ylabel('FNR')

@@ -89,9 +89,9 @@ def gen_roc(mu, sigma, img_flat, img_ref_flat):
     # generate values of t
     c_value = calc_c(sigma)
     t_values = [0]
-    for i in range(1, 5000):
+    for i in range(1, 10000):
         # print(i)
-        t_values.append(t_values[i-1] + float(c_value/5000))
+        t_values.append(t_values[i-1] + float(c_value/10000))
     # calculate bayesian for each 
     # {t_value: (fpr, fnr)}
     bayesian_error_results = np.empty(shape=(len(t_values), 2))
